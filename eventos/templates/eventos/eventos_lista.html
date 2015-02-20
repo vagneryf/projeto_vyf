@@ -1,0 +1,17 @@
+{% if eventos_list %}
+
+	<div class="list-group">
+		<a class="list-group-item active" href="#">
+			<b>Próximos Eventos:</b>
+		</a>
+		{% for evento in eventos_list %}
+			{% if evento.sub_evento %}
+				<a class="list-group-item" href="{% url 'eventos:detail' evento.id %}"><li><b>{{ evento.sub_evento }} </b>- {{ evento }} <font color="gray"> - (Início em: {{ evento.data_inicio }})</li></font></a>
+			{% else %}
+				<a class="list-group-item" href="{% url 'eventos:detail' evento.id %}"><b>{{ evento }} </b><font color="gray"> - (Início em: {{ evento.data_inicio }})</font></a>	
+			{% endif %}
+		{% endfor %}
+	</div>
+	{% else %}
+		<p>Nenhum evento disponível</p>
+{% endif %}

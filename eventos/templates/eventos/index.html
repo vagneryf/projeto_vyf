@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+	<h1>Eventos</h1>
+
+
+<div class="btn-group">	
+	<button type="button" class="btn btn-default dropdown-toggle" data-toggle = "dropdown" aria-expanded="false">Ano <span class="caret"></span>
+	</button>
+	<ul class="dropdown-menu" role="menu">
+		{% if anos_list %}
+			{% for ano in anos_list %}
+				<li><a href="?ano={{ ano }}">{{ ano }}</a></li>
+			{% endfor %}
+	 	{% else %}
+			Nenhum ano
+		{% endif %}
+		
+		<li class="divider"></li>
+		<li><a href="/eventos">Todos</a></li>
+	</ul>
+</div>
+	
+<div class="btn-group">
+	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+	 Mês <span class="caret"></span>
+	</button>
+	<ul class="dropdown-menu" role="menu">
+		{% if meses_list %}
+			{% for meses in meses_list %}
+				<li><a href="?mes={{ forloop.counter0 }}">{{ meses }}</a></li>
+			{% endfor %}
+		{% else %}
+		<li><a href="#">Nenhuma</a></li>
+		{% endif %}
+		
+		<li class="divider"></li>
+		<li><a href="/eventos">Todos</a></li>
+	</ul>
+</div>
+
+<div class="btn-group">	
+	<button type="button" class="btn btn-default dropdown-toggle" data-toggle = "dropdown" aria-expanded="false">Dia <span class="caret"></span>
+	</button>
+	<ul class="dropdown-menu" role="menu">
+		{% if dias_list %}
+			{% for dia in dias_list %}
+				<li><a href="?dia={{ dia }}">{{ dia }}</a></li>
+			{% endfor %}
+	 	{% else %}
+			Nenhum dia
+		{% endif %}
+		
+		<li class="divider"></li>
+		<li><a href="/eventos">Todos</a></li>
+	</ul>
+</div>
+
+
+	
+<!-- {% for i in "xxxxxxxxxxxx" %} 
+	{{ forloop.counter|date:"b" }} 
+{% endfor %} -->
+
+	<a href="/eventos"><button type="button" class="btn btn-primary">Todos</button></a>
+	<a href="?em_andamento=1"><button type="button" class="btn btn-info">Em andamento</button></a>
+
+	{% if em_andamento %}
+		<h3>Em andamento:</h3>
+		{% if eventos_list %}
+		<table class="table table-condensed">
+			<tr>
+				<th>Evento</th>
+				<th>Data início</th>
+				<th>Data fim</th>
+				<th>Categoria</th>
+				<th>Em andamento</th>
+			</tr>
+			{% for evento in eventos_list %}
+			<tr>
+				{% if evento.evento_em_andamento %}
+					{% if evento.sub_evento %}
+						<td>
+							<a href="{% url 'eventos:detail' evento.id %}"><ul><li>{{ evento.sub_evento }} >> {{ evento }}</a></li></ul>
+						</td>
+					{% else %}
+						<td>
+							<a href="{% url 'eventos:detail' evento.id %}">{{ evento }}</a>
+						</td>
+					{% endif %}
+					<td>
+						{{ evento.data_inicio }}
+					</td>
+					<td>
+						{{ evento.data_fim }}
+					</td>
+					<td>
+						{{ evento.categoria|default:"Nenhum" }}
+					</td>
+					<td>
+						{% if evento.evento_em_andamento %}
+							<b>Sim</b>
+						{% else %}
+							Não
+						{% endif %}
+					</td>
+			<!-- <td>
+				{% if  artigo.categoria %}
+					{{ artigo.categoria }}	
+				{% else %}		
+					Nenhum		
+				{% endif %}
+			</td> -->
+				{% endif %}
+			</tr>
+			{% endfor %}
+		</table>
+	{% else %}
+		<h4><em>* Nenhum evento disponível</em></h4>
+	{% endif %}
+
+
+	{% else %}
+	<p> </p>
+	{% if eventos_list %}
+	<table class="table table-condensed">
+		<tr>
+			<th>Evento</th>
+			<th>Data início</th>
+			<th>Data fim</th>
+			<th>Categoria</th>
+			<th>Em andamento</th>
+		</tr>
+		{% for evento in eventos_list %}
+		<tr>
+			{% if evento.sub_evento %}
+				<td>
+					<a href="{% url 'eventos:detail' evento.id %}"><ul><li>{{ evento.sub_evento }} >> {{ evento }}</a></li></ul>
+				</td>
+			{% else %}
+				<td>
+					<a href="{% url 'eventos:detail' evento.id %}">{{ evento }}</a>
+				</td>
+			{% endif %}
+			<td>
+				{{ evento.data_inicio }}
+			</td>
+			<td>
+				{{ evento.data_fim }}
+			</td>
+			<td>
+				{{ evento.categoria|default:"Nenhum" }}
+			</td>
+			<td>
+				{% if evento.evento_em_andamento %}
+					<b>Sim</b>
+				{% else %}
+					Não
+				{% endif %}
+			</td>
+			<!-- <td>
+				{% if  artigo.categoria %}
+					{{ artigo.categoria }}	
+				{% else %}		
+					Nenhum		
+				{% endif %}
+			</td> -->
+		</tr>
+		{% endfor %}
+	</table>
+	{% else %}
+		<h4><em>* Nenhum evento disponível</em></h4>
+	{% endif %}
+
+	{% endif %}
+
+
+{% endblock content %}

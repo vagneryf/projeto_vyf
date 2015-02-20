@@ -1,0 +1,21 @@
+.propaganda_a {
+    margin-left: auto;
+    margin-right: auto;
+    height: 90px;
+    width: 728px;
+    border-width: 1px;
+	border-style: dashed;
+	border-color: gray;
+	background-color: #eeeeee;
+	color: black;
+  }
+
+.propaganda_b {
+	background-color: #eeeeee;
+	color: black;
+	height: 300px;
+	width: 250px;
+	border-width: 1px;
+	border-style: dashed;
+	border-color: gray;
+}

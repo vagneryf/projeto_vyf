@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- <ul class="nav nav-tabs" role="tablist">
+	<li role="presentation">
+		<a href="/">Home</a>		
+	</li>
+	<li role="presentation">
+		<a href="/artigos">Artigos</a>		
+	</li>		
+	<li role="presentation">
+		<a href="/noticias">Notícias</a>		
+	</li>
+	<li role="presentation">
+		<a href="/polls">Polls</a>
+	</li>
+	<li role="presentation">
+		<a href="/categorias">Categorias</a>
+	</li>
+	<li class="active" role="presentation">
+		<a href="/bio">Bio</a>
+	</li>
+</ul> -->
+
+{# <div class=artigo> #}
+	<h1>Bio</h1>
+
+	<div class="btn-group">
+		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+			Categoria <span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu" role="menu">
+			{% if categorias_list %}
+				{% for categoria in categorias_list %}
+					<li><a href="?categoria={{ categoria.id }}">{{ categoria }}</a></li>
+				{% endfor %}
+			{% else %}
+			<li><a href="#">Nenhuma</a></li>
+			{% endif %}
+			
+			<li class="divider"></li>
+			<li><a href="/bio">Todos</a></li>
+		</ul>
+	</div>
+
+	<h3>Biografias:</h3>
+	{% if bio_list %}
+	<table class="table table-condensed">
+		<tr>
+			<th>Bio</th>
+			<th>Publicacao</th>
+			<th>Categoria</th>
+		</tr>
+		{% for bio in bio_list %}
+		<tr>
+			<td>
+				<a href="{% url 'bio:detail' bio.id %}">{{ bio.nome }}</a>
+			</td>
+			<td>
+				{{ bio.publicacao }}
+			</td>
+			<td>
+				{% if  bio.categoria > 0 %}
+					{{ bio.categoria }}	
+				{% else %}		
+					Nenhum		
+				{% endif %}
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+
+<!-- <ul>
+		{% for artigo in artigos_list %}
+			<li>
+				<a href="{% url 'artigos:detail' artigo.id %}">{{ artigo }}</a>
+			</li>
+		{% endfor %}
+	</ul> -->
+	{% else %}
+		<h4><em>*Nenhum bio disponível</em></h4>
+	{% endif %}
+{# </div> #}
+{% endblock content %}

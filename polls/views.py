@@ -1,0 +1,67 @@
+# -*- coding: utf-8 -*-
+# usar quando tem palavras com acentos dentro do codigo
+
+from django.utils import timezone
+from django.shortcuts import get_object_or_404, render
+from django.shortcuts import render
+from django.http import HttpResponseRedirect, HttpResponse
+from django.core.urlresolvers import reverse
+from django.views import generic
+from polls.models import Choice, Question
+from categorias.models import Categoria
+
+# Create your views here.
+
+# paginas com template padrao do django
+class IndexView(generic.ListView):
+	template_name = 'polls/index.html'
+	context_object_name = 'latest_question_list'
+	categorias_list = Categoria.objects.all()
+
+	def get_queryset(self):
+		"""Return the last five published question."""
+		# return Question.objects.order_by('-pub_date')[:5]
+		""" 
+		Return the last five published questions (not including those set to be published in the future).
+		"""
+		return Question.objects.filter(
+			pub_date__lte=timezone.now()
+		).order_by('-pub_date')[:5]
+		[{ 'categorias_list' : categorias_list, }]
+
+
+class DetailView(generic.DetailView):
+	# Antes do tests.py
+	model = Question
+	template_name = 'polls/detail.html'
+	# Novo nao funciona
+	# def get_queryset(self):
+ #        # Excludes any questions that aren t published yet.
+ #        return Question.objects.filter(pub_date__lte=timezone.now())
+
+class ResultsView(generic.DetailView):
+	model = Question
+	template_name = 'polls/results.html'
+
+
+def vote(request, question_id):
+	# antes
+	# return HttpResponse("You're voting on question %s." % question_id)
+	# novo com instrucoes para voto
+	p = get_object_or_404(Question, pk=question_id)
+	try:
+		selected_choice = p.choice_set.get(pk=request.POST['choice'])
+	except (KeyError, Choice.DoesNotExist):
+		# Redisplay the question voting form.
+		return render(request, 'polls/detail.html', {
+        	'question': p,
+        	'error_message': "Favor selecione uma opção.",
+        })
+	else:
+		selected_choice.votes += 1
+		selected_choice.save()
+		# Always return an HttpResponseRedirect after sucefully dealing
+		# with POST data. This prevents data from being posted twice if a 
+		# user hits the Back button.
+		return HttpResponseRedirect(reverse('polls:results', args=(p.id,)))
+

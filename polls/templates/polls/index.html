@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- <ul class="nav nav-tabs" role="tablist">
+	<li role="presentation">
+		<a href="/">Home</a>		
+	</li>
+	<li role="presentation">
+		<a href="/artigos">Artigos</a>		
+	</li>		
+	<li role="presentation">
+		<a href="/noticias">Notícias</a>		
+	</li>
+	<li class="active" role="presentation">
+		<a href="/polls">Polls</a>		
+	</li>
+	<li role="presentation">
+		<a href="/categorias">Categorias</a>
+	</li>
+	<li role="presentation">
+		<a href="/bio">Bio</a>
+	</li>
+</ul> -->
+
+<h1>Votação</h1>
+<p>Segue abaixo a lista de votação</p>
+
+{% if latest_question_list %}
+	<ul>
+	{% for question in latest_question_list %}
+		{# Parametro com endereco referenciado #}
+		{# <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li> #}
+		{# Parametro melhor para futuras alteracoes #}
+		<li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }} - <i>Artigo: {{ question.artigo }}</i></a></li>
+	{% endfor %}
+	</ul>
+{% else %}
+	<p>No polls are avaliable</p>
+{% endif %}
+
+{% endblock content %}

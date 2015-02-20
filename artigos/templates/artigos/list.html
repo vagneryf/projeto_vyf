@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+	<h1>Artigos</h1>
+	
+	<div class="btn-group">
+		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+			Categoria <span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu" role="menu">
+			{% if categorias_list %}
+				{% for categoria in categorias_list %}
+					<li><a href="?categoria={{ categoria.id }}">{{ categoria }}</a></li>
+				{% endfor %}
+			{% else %}
+			<li><a href="#">Nenhuma</a></li>
+			{% endif %}
+			
+			<li class="divider"></li>
+			<li><a href="/artigos">Todos</a></li>
+		</ul>
+	</div>
+
+	<b>{{ categoria_nome.nome|default:"Todas Categorias" }}</b>	
+	
+
+	<h3>Postados recentemente:</h3>
+	{% if artigos %}
+	<table class="table table-condensed">
+		<tr>
+			<th>Artigo</th>
+			<th>Data</th>
+			<th>Categoria</th>
+		</tr>
+		{% for artigo in artigos %}
+		<tr>
+			<td>
+				<a href="{% url 'artigos:detail' artigo.id %}">{{ artigo }}</a>
+			</td>
+			<td>
+				{{ artigo.publicacao }}
+			</td>
+			<td>
+				{{ artigo.categoria|default:"Nenhum" }}
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+
+
+	{% else %}
+		<h4><em>* Nenhum artigo disponível</em></h4>
+	{% endif %}
+
+	<div class="pagination">
+		<span class="step-links">
+			{% if artigos.has_previous %}
+				<a href="?page={{ artigos.previous_page_number }}">Anterior</a>		
+			{% endif %}
+			<span class="current">
+				Pagina {{ artigos.number }} de {{ artigos.paginator.num_pages }}.
+			</span>
+			{% if artigos.has_next %}
+				<a href="?page={{ artigos.next_page_number }}">Próximo</a>
+			{% endif %}
+		</span>
+	</div>
+
+{% endblock content %}

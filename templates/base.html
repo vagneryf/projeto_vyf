@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Projeto VYF</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap3/css/bootstrap.min.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'artigos/style.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'propaganda.css' %}" />
+	{# <link href="grid.css" rel="stylesheet"> #}
+	<style type="text/css">
+		body { padding-top: 50px }
+	</style>
+</head>
+
+<body>
+
+
+<div class="container">
+
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/"><b>VYF</b></a>
+			</div>
+
+			<nav class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+			<!-- <li class="active"><a href="/artigos">Artigos <span class="sr-only">(current)</span></a></li> -->
+					<li><a href="/artigos">Artigos <span class="sr-only">(current)</span></a></li>
+					<li><a href="/bio">Bio </a></li>
+					<li><a href="/polls">Polls </a></li>
+					<li><a href="/eventos">Eventos </a></li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Categoria Artigos<span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							{% if categorias_list  %}
+								{% for categoria in categorias_list %}
+									<li><a href="/artigos/?categoria={{ categoria.id }}">{{ categoria }}</a></li>	
+								{% endfor %}
+							{% else %}
+								<li><a href="#">Sem Categoria</a></li>
+							{% endif %}
+							<li><a href="#">Action</a></li>
+							<li class="divider"></li>
+							<li><a href="/artigos">Todos</a></li>
+						</ul>
+					</li>
+				</ul>
+				<form class="navbar-form navbar-right" role="search" action="">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Procurar (Não funciona ainda)">
+					</div>
+				</form>
+			</nav>
+
+		</div>
+	</nav>
+
+
+
+	<div class="row">
+		<div class="col-md-3" align="center">
+			<img src="{% static "images/logo_python.jpg" %}" alt="logo python"></img>
+		</div>
+		<div class="col-md-9" align="center">
+			<a href="/"><h1>VYF Home Page</h1></a>
+			<p class="lead">Página do 1º projeto para testes</p>
+		</div>
+	</div>
+
+	
+	<!-- Propaganda 728x90 style pelo /project-style/propaganda.css  -->
+<!-- 	<div class="propaganda_a" align="center"><h3>Propaganda</h3><p>(728x90)</p></div> -->
+
+	{% block content %}{% endblock content %}
+</div>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<!-- <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script> -->
+<script src="{% static 'bootstrap3/js/bootstrap.min.js' %}"></script>
+</body>
+</html>

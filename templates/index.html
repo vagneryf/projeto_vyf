@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+{# Apenas para delimitar o campo das propagandas #}
+<!-- 
+<style type="text/css">
+.propaganda_b {
+	background-color: #eeeeee;
+	color: black;
+	height: 300px;
+	width: 250px;
+	border-width: 1px;
+	border-style: dashed;
+	border-color: gray;
+}
+</style>
+ -->
+
+<!-- <ul class="nav nav-tabs" role="tablist">
+	<li class="active" role="presentation">
+		<a href="/">Home</a>		
+	</li>
+	<li role="presentation">
+		<a href="/artigos">Artigos</a>		
+	</li>		
+	<li role="presentation">
+		<a href="/artigos/noticias">Notícias</a>		
+	</li>
+	<li role="presentation">
+		<a href="/polls">Polls</a>
+	</li>
+	<li role="presentation">
+		<a href="/categorias">Categorias</a>
+	</li>
+	<li role="presentation">
+		<a href="/bio">Bio</a>
+	</li>
+</ul> -->
+
+<div class="col-md-8">
+	<!-- <a alt='Compartilhar no WhatsApp' data-action='share/whatsapp/share' expr:href='&quot;whatsapp://send?text=&quot; + data:post.title + &quot;-&quot; + data:post.url' title='Compartilhar no WhatsApp'>Compartilhar no WhatsApp</a> -->
+	<h1>Home VYF</h1>
+	<p>Está é a home page do site VYF
+	<br>O intuito deste site é fazer teste para o aprendizado do Django.</p>
+	<h2>Texto:</h2>
+	<p>As experiências acumuladas demonstram que a estrutura atual da organização talvez venha a ressaltar a relatividade do investimento em reciclagem técnica.</p>
+	<p>Nunca é demais lembrar o peso e o significado destes problemas, uma vez que a adoção de políticas descentralizadoras pode nos levar a considerar a reestruturação das posturas dos órgãos dirigentes com relação às suas atribuições.</p>
+	<h3>Artigos Recentes</h3>
+	{% include "artigos/artigos_lista.html" with artigos_list=artigos_list %}
+	{% include "artigos/noticias_lista.html" with noticias_list=noticias_list %}
+</div>
+
+ 
+<div class="col-md-4">
+	<br>
+	{% include "eventos/eventos_lista.html" with eventos_list=eventos_list %}
+
+	<p></p>
+	<div class="propaganda_b"><br><br><br><br><h3 align="center">Propaganda</h3><p align="center">(300x250)</p></div>
+	<p></p>
+	{% include "artigos/categorias_lista.html" with categorias_list=categorias_list %}
+	<div class="propaganda_b"><br><br><br><br><h3 align="center">Propaganda</h3><p align="center">(300x250)</p></div>
+</div>
+
+{% endblock content %}
+

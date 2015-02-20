@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- <ul class="nav nav-tabs" role="tablist">
+	<li role="presentation">
+		<a href="/">Home</a>		
+	</li>
+	<li role="presentation">
+		<a href="/artigos">Artigos</a>		
+	</li>		
+	<li role="presentation">
+		<a href="/noticias">Notícias</a>		
+	</li>
+	<li role="presentation">
+		<a href="/polls">Polls</a>
+	</li>
+	<li class="active" role="presentation">
+		<a href="/categorias">Categorias</a>
+	</li>
+	<li role="presentation">
+		<a href="/bio">Bio</a>
+	</li>
+</ul> -->
+
+	<h1>Categorias</h1>
+	{% if categoria_list %}
+	<table class="table table-condensed">
+		<tr>
+			<th>Categoria</th>
+			<th>Detalhes</th>
+		</tr>
+		{% for categoria in categoria_list %}
+		<tr>
+			<td>
+				{{ categoria.nome }}
+			</td>
+			<td>
+				{{ categoria.detalhe }}
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+{% else %}
+		<p>Nenhuma categoria disponível</p>
+	</table>
+{% endif %}
+{% endblock content %}

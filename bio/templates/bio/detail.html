@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load comments %}
+{% block content %}
+
+<!-- <ul class="nav nav-tabs" role="tablist">
+	<li role="presentation">
+		<a href="/">Home</a>		
+	</li>
+	<li role="presentation">
+		<a href="/artigos">Artigos</a>		
+	</li>		
+	<li role="presentation">
+		<a href="/noticias">Notícias</a>		
+	</li>
+	<li role="presentation">
+		<a href="/polls">Polls</a>
+	</li>
+	<li role="presentation">
+		<a href="/categorias">Categorias</a>
+	</li>
+	<li class="active" role="presentation">
+		<a href="/bio">Bio</a>
+	</li>
+</ul> -->
+
+	<h1>{{ bio }}</h1>
+
+		<h3>Informações</h3>
+		<p>{{ bio.informacoes|safe }}</p>
+		<h3>Publicação:</h3>
+		<p>{{ bio.publicacao }}</p>
+		<h3>Categoria:</h3>
+		<p>{{ bio.categoria }}</p>
+
+		<h3>Comentários:</h3>
+		<div class="well">
+			{% get_comment_list for bio as comentarios %}
+			{% for comentario in comentarios %}
+			<div class="comentario">
+				<b>Nome: {{ comentario.name }}<br/></b>
+				{% if comentario.url %}URL: {{ comentario.url }}{% endif %} <br/>
+				{{ comentario.comment|linebreaks }}
+				<hr/>
+			</div>
+			{% endfor %}
+			<h3>Envie um comentário</h3>
+			{% render_comment_form for bio %}
+		</div>
+
+<p><a href="/bio/">Voltar</a></p>
+
+{% endblock content %}
+{% comment %}
+	
+{% endcomment %}

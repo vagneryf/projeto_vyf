@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+	<h1>{{ evento }}</h1>
+	{% if evento.evento_em_andamento %}
+		<span class="label label-primary">Evento em andamento</span>
+	{% endif %}
+	{% if evento.sub_evento %}
+		<h2><b>Evento:</b> 
+			<a href="{% url 'eventos:detail' evento.sub_evento.id %}"><ul><li>{{ evento.sub_evento }}</a></li></ul></h2>
+	{% endif %}
+	<p>Categoria: {{ evento.categoria }}</p>
+	<h3>Data:</h3>
+	<p><b>De</b> {{ evento.data_inicio }} <b>até</b> {{ evento.data_fim }}</p>
+	<p>{{ evento.texto_simples }}</p>
+	<h3>Informações: </h3>
+	<p>{{ evento.texto_maior|safe }}</p>
+	<p><b>Local:</b> {{ evento.local }}</p>
+	<p><b>Tags:</b> {{ evento.tag }}</p>
+		
+
+
+{% endblock content %}
+{% comment %}
+	
+{% endcomment %}
