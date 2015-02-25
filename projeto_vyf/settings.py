@@ -51,6 +51,7 @@ INSTALLED_APPS = (
     'django.contrib.comments', # para comentarios
     'debug_toolbar',
     'django.contrib.admindocs',
+    'django_select2', # para usar o Select2, nao esquecer o collectstatic
     'django.contrib.redirects',
 
 )
@@ -80,6 +81,13 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# configuracoes para select2:
+AUTO_RENDER_SELECT2_STATICS = True # True para o select2 incluir os <script> <link> automaticamente
+# SELECT2_MEMCACHE_HOST = None
+# SELECT2_MEMCACHE_PORT = None
+# SELECT2_MEMCACHE_TTL = 900
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/

@@ -34,6 +34,78 @@
 		<h3>Categoria:</h3>
 		<p>{{ artigo.categoria }}</p>
 
+
+
+		<select class="js-example-basic-multiple" multiple="multiple" style="width: 300px">
+			<option value="AL">Alabama</option>
+  			<option value="AU">Aulabama</option>
+  			<option value="WY">Wyoming</option>
+		</select>
+
+		<p></p>
+		<select class="js-example-basic-multiple" multiple="multiple" style="width: 300px">
+
+		{% if categorias_list %}
+			{% for categoria in categorias_list %}
+				<option value="AL">{{ categoria }}</option>	
+			{% endfor %}
+		{% endif %}
+			<option value="AL">Nenhum</option>
+		</select>
+
+		<script>
+			$(".js-example-basic-multiple").select2();
+		</script>
+
+		<p>Placeholder</p>
+		<select class="js-example-placeholder-single" style="width: 300px">
+			<option value="AL">Alabama</option>
+  			<option value="AU">Aulabama</option>
+  			<option value="WY">Wyoming</option>
+		</select>
+
+		<script>
+			$(".js-example-placeholder-single").select2({
+  				placeholder: "Select a state",
+  				allowClear: true
+			});
+		</script>
+
+
+		<select class="js-data-example-ajax">
+  			<option value="select2/select2" selected="selected">select2/select2</option>
+		</select>
+
+		<script>
+			$(".js-data-example-ajax").select2({
+			  ajax: {
+			    url: "https://api.github.com/search/repositories",
+			    dataType: 'json',
+			    delay: 250,
+			    data: function (params) {
+			      return {
+			        q: params.term, // search term
+			        page: params.page
+			      };
+			    },
+			    processResults: function (data, page) {
+			      // parse the results into the format expected by Select2.
+			      // since we are using custom formatting functions we do not need to
+			      // alter the remote JSON data
+			      return {
+			        results: data.items
+			      };
+			    },
+			    cache: true
+			  },
+			  escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+			  minimumInputLength: 1,
+			  templateResult: formatRepo, // omitted for brevity, see the source of this page
+			  templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+			});
+		</script>
+
+
 		<h3>Comentários:</h3>
 		<div class="well">
 			{% get_comment_list for artigo as comentarios %}
@@ -52,6 +124,7 @@
 <p><a href="/artigos/">Voltar</a></p>
 
 
+		
 
 {% endblock content %}
 {% comment %}
