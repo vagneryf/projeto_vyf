@@ -51,6 +51,7 @@ INSTALLED_APPS = (
     'django.contrib.comments', # para comentarios
     'debug_toolbar',
     'django.contrib.admindocs',
+    'django.contrib.redirects',
 
 )
 
@@ -62,6 +63,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
 )
 
 ROOT_URLCONF = 'projeto_vyf.urls'
