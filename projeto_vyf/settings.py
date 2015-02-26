@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'categorias',
     'bio',
     'eventos',
+    'testes',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -52,6 +53,7 @@ INSTALLED_APPS = (
     'debug_toolbar',
     'django.contrib.admindocs',
     'django_select2', # para usar o Select2, nao esquecer o collectstatic
+    'easy_select2',
     'django.contrib.redirects',
 
 )

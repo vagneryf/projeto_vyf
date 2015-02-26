@@ -11,6 +11,11 @@ from django.core.exceptions import ValidationError
 #     if value < self.data_inicio:
 #         raise ValidationError(u'data errada')
 
+
+# verificar o erro que ocorre em makemigrations caso a funcao mais_quinze nao esteja fora do class  Evento
+def mais_quinze():
+    return timezone.now()+timedelta(minutes=15)
+
 class Evento(models.Model):
     titulo = models.CharField(max_length=100)
     data_inicio = models.DateTimeField(u'Data início', default=timezone.now, blank=True)

@@ -1,13 +1,13 @@
 from django.contrib import admin
-from artigos.models import Artigo
+from testes.models import Teste
 from categorias.models import Categoria
 # from easy_select2 import select2_modelform
 
 # Register your models here.
 
-# TestForm = select2_modelform(Artigo, attrs={'width': '250px'})
+# TestForm = select2_modelform(Teste, attrs={'width': '250px'})
 
-class ArtigoAdmin(admin.ModelAdmin):
+class TesteAdmin(admin.ModelAdmin):
 	list_display = ('titulo','publicacao','categoria',)
 	fieldsets = [
 		(None, {'fields': ['titulo']}),
@@ -26,5 +26,4 @@ class ArtigoAdmin(admin.ModelAdmin):
 			'/static/tinymce_setup.js',
 		]
 
-admin.site.register(Artigo, ArtigoAdmin)
-
+admin.site.register(Teste, TesteAdmin)

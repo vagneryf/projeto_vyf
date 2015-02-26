@@ -28,4 +28,5 @@ urlpatterns = patterns('',
     # url(r'^categoria/', include('artigos.urls', namespace="index_cat")),
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^select2/', include('django_select2.urls')), # para usar o select2
+    url(r'^testes/', include('testes.urls', namespace="testes")),
 )
