@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+	<h1>Testes</h1>
+
+		<select class="js-example-basic-multiple" multiple="multiple" style="width: 300px">
+
+		{% if categorias_list %}
+			{% for categoria in categorias_list %}
+				<option value="{{ categoria.id }}">{{ categoria }}</option>	
+			{% endfor %}
+		{% endif %}
+			<option value="AL">Nenhum</option>
+		</select>
+
+		<script>
+			$(".js-example-basic-multiple").select2();
+		</script>
+	
+	<div class="btn-group">
+		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+			Categoria <span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu" role="menu">
+			{% if categorias_list %}
+				{% for categoria in categorias_list %}
+					<li><a href="?categoria={{ categoria.id }}">{{ categoria }}</a></li>
+				{% endfor %}
+			{% else %}
+			<li><a href="#">Nenhuma</a></li>
+			{% endif %}
+			
+			<li class="divider"></li>
+			<li><a href="/testes">Todos</a></li>
+		</ul>
+	</div>
+
+	<b>{{ categoria_nome.nome|default:"Todas Categorias" }}</b>	
+	
+
+	<h3>Postados recentemente:</h3>
+	{% if testes_list %}
+	<table class="table table-condensed">
+		<tr>
+			<th>Teste</th>
+			<th>Data</th>
+			<th>Categoria</th>
+		</tr>
+		{% for teste in testes_list %}
+		<tr>
+			<td>
+				<a href="{% url 'testes:detail' teste.id %}">{{ teste }}</a>
+			</td>
+			<td>
+				{{ teste.publicacao }}
+			</td>
+			<td>
+				{{ teste.categoria|default:"Nenhum" }}
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+
+
+	{% else %}
+		<h4><em>* Nenhum teste disponível</em></h4>
+	{% endif %}
+
+{% endblock content %}

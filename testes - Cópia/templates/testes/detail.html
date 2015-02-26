@@ -12,17 +12,7 @@
 		<p>{{ teste.publicacao }}</p>
 		<h3>Categoria:</h3>
 		<p>{{ teste.categoria }}</p>
-		{% comment %}
-		<h3>Tags:</h3>
-		{% if teste.tags %}
-			{% for tag in teste.tags %}
-				{{ tag.name }}, 
-			{% endfor %}
-		{% else %}
-			Nenhuma tag
-		{% endif %}
-		{% endcomment %}
-		<br><br>
+
 
 
 		<select class="js-example-basic-multiple" multiple="multiple" style="width: 300px">

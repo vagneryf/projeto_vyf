@@ -52,9 +52,9 @@ INSTALLED_APPS = (
     'django.contrib.comments', # para comentarios
     'debug_toolbar',
     'django.contrib.admindocs',
-    'django_select2', # para usar o Select2, nao esquecer o collectstatic
-    'easy_select2',
-    'django.contrib.redirects',
+    # 'django_select2', # para usar o Select2, nao esquecer o collectstatic
+    'easy_select2', # para usar os campos do Select2 no admin
+    'django.contrib.redirects', # para redirecionamento de url
 
 )
 
@@ -66,7 +66,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
+    'django.contrib.redirects.middleware.RedirectFallbackMiddleware', # para redirecionar url
 )
 
 ROOT_URLCONF = 'projeto_vyf.urls'
@@ -85,7 +85,7 @@ DATABASES = {
 }
 
 # configuracoes para select2:
-AUTO_RENDER_SELECT2_STATICS = True # True para o select2 incluir os <script> <link> automaticamente
+# AUTO_RENDER_SELECT2_STATICS = True # True para o select2 incluir os <script> <link> automaticamente
 # SELECT2_MEMCACHE_HOST = None
 # SELECT2_MEMCACHE_PORT = None
 # SELECT2_MEMCACHE_TTL = 900

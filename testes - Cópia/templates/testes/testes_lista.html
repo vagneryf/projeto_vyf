@@ -1,0 +1,13 @@
+{% if testes_list %}
+
+	<div class="list-group">
+		<a class="list-group-item active" href="#">
+			<b>Últimos Testes:</b>
+		</a>
+		{% for teste in testes_list %}
+			<a class="list-group-item" href="{% url 'testes:detail' teste.id %}">{{ teste }} <font color="lightgray"> Publicado em: {{ teste.publicacao }}</font></a>	
+		{% endfor %}
+	</div>
+	{% else %}
+		<p>Nenhum teste disponível</p>
+{% endif %}
