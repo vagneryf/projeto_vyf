@@ -17,18 +17,18 @@ class Tag(models.Model):
 
 
 class Teste(models.Model):
-	titulo = models.CharField(max_length=100)
-	conteudo = models.TextField()
-	publicacao = models.DateTimeField('Data de Publicacao', default=datetime.now, blank=True)
-	# colocar o default=datetime.now, blank=True para data atual automatica
-	categoria = models.ForeignKey(Categoria, null=True, blank=True)
+    titulo = models.CharField(max_length=100)
+    conteudo = models.TextField()
+    publicacao = models.DateTimeField('Data de Publicacao', default=datetime.now, blank=True)
+    # colocar o default=datetime.now, blank=True para data atual automatica
+    categoria = models.ForeignKey(Categoria, null=True, blank=True)
 
-	# tag = models.CharField(blank=False, default='', max_length=64,
+    # tag = models.CharField(blank=False, default='', max_length=64,
  #                            help_text='Insira a tag')
-	tags = models.ManyToManyField(Tag)  # To demonstrate select2 multiple
+    tags = models.ManyToManyField(Tag)  # To demonstrate select2 multiple
 
-	def __unicode__(self):
-		return self.titulo #, self.conteudo, self.publicacao
-		# erro ao retornar + de um item em self
-	class Meta:
-		ordering = ('-publicacao',) # ordena a ordem dos artigos
+    def __unicode__(self):
+        return self.titulo #, self.conteudo, self.publicacao
+        # erro ao retornar + de um item em self
+    class Meta:
+        ordering = ('-publicacao',) # ordena a ordem dos artigos

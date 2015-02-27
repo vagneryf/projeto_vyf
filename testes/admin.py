@@ -10,22 +10,22 @@ from easy_select2 import select2_modelform
 
 
 # class TesteAdmin(admin.ModelAdmin):
-# 	list_display = ('titulo','publicacao','categoria',)
-# 	fieldsets = [
-# 		(None, {'fields': ['titulo']}),
-#     	('Data publicacao', {'fields': ['publicacao']}),
-#     	('Texto', {'fields': ['conteudo']}),
-#     	('Categoria',{'fields':['categoria']})
+#   list_display = ('titulo','publicacao','categoria',)
+#   fieldsets = [
+#       (None, {'fields': ['titulo']}),
+#       ('Data publicacao', {'fields': ['publicacao']}),
+#       ('Texto', {'fields': ['conteudo']}),
+#       ('Categoria',{'fields':['categoria']})
 
-# 	]
-# 	list_filter = ['publicacao','categoria']
-# 	search_fields = ['titulo']
+#   ]
+#   list_filter = ['publicacao','categoria']
+#   search_fields = ['titulo']
 
-# 	class Media:
-# 		js = [
-# 			'/static/grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js',
-# 			'/static/tinymce_setup.js',
-# 		]
+    # class Media:
+    #   js = [
+    #       '/static/grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js',
+    #       '/static/tinymce_setup.js',
+    #   ]
 
 TesteForm = select2_modelform(Teste, attrs={'width': '250px'})
 
@@ -61,6 +61,12 @@ TesteForm = select2_modelform(Teste, attrs={'width': '250px'})
 
 class TesteAdmin(admin.ModelAdmin):
     form = TesteForm
+
+    class Media:
+        js = [
+            '/static/grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js',
+            '/static/tinymce_setup.js',
+        ]
 
 admin.site.register(Tag)
 admin.site.register(Teste, TesteAdmin)

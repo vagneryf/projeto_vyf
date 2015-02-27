@@ -12,17 +12,20 @@
 		<p>{{ teste.publicacao }}</p>
 		<h3>Categoria:</h3>
 		<p>{{ teste.categoria }}</p>
-		{% comment %}
+		
 		<h3>Tags:</h3>
-		{% if teste.tags %}
-			{% for tag in teste.tags %}
-				{{ tag.name }}, 
+		{% if teste_tag %}
+			{% for tag in teste_tag %}
+				<a href="/testes/?tag={{ tag.id }}">{{ tag }} id: {{ tag.id }}, </a>
 			{% endfor %}
 		{% else %}
 			Nenhuma tag
 		{% endif %}
-		{% endcomment %}
+		
 		<br><br>
+		{% for tag in teste.tags.all %}
+			<a href="/testes/?tag={{ tag.id }}">{{ tag }} id: {{ tag.id }}, </a>
+		{% endfor %}
 
 
 		<select class="js-example-basic-multiple" multiple="multiple" style="width: 300px">

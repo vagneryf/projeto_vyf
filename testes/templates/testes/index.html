@@ -37,7 +37,20 @@
 		</ul>
 	</div>
 
-	<b>{{ categoria_nome.nome|default:"Todas Categorias" }}</b>	
+	<b>Filtro Categoria: </b>{{ categoria_nome.nome|default:"Todas categorias" }}
+{% comment %}		
+	{% if tag_nome %}
+		{% for tag in tag_nome %}
+			<a href="/testes/?tag={{ tag_nome.id }}">{{ tag_nome }}</a>
+		{% endfor %}
+	{% endif %}
+
+			
+		<p><b>Filtro Tag: </b>{{ tag_nome }}</p>
+		{% if tag_nome2 %}
+			<p><b>Filtro Tag2: </b>{{ tag_nome2 }}</p>
+		{% endif %}
+	{% endcomment %}
 	
 
 	<h3>Postados recentemente:</h3>
@@ -67,5 +80,9 @@
 	{% else %}
 		<h4><em>* Nenhum teste disponível</em></h4>
 	{% endif %}
+
+	<div class="alert alert-info" role="alert">
+		Tags:
+	</div>
 
 {% endblock content %}
