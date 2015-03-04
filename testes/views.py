@@ -23,30 +23,23 @@ def detail(request, url_testeid):
         })
 
 def testes_index(request):
+
     testes_list = Teste.objects.all()
     tag = request.GET.get('tag','').split(',')
     # tag2 = request.GET.get('tag2',)
     categoria = request.GET.get('categoria',0)
     categoria_nome = 0
-    tag_nome = 0
-    # tag_nome2 = None
+    tag_nome = None
+    # tag = None
     
     if categoria > 0:
         testes_list = testes_list.filter(categoria=categoria)
         categoria_nome = Categoria.objects.get(pk=categoria)
 
-    # if tag > 0:
-    #     testes_list = testes_list.filter(tags=tag)
-    #     tag_nome = Tag.objects.get(id=tag)
 
     if tag:
-        # if tag2:
         testes_list = testes_list.filter(tags__in=tag).distinct()
         tag_nome = Tag.objects.filter(id__in=tag).distinct()
-            # tag_nome2 = Tag.objects.get(id=tag2)
-        # else:    
-        #     testes_list = testes_list.filter(tags=tag)
-        #     tag_nome = Tag.objects.get(id=tag)
 
     return render(request, 'testes/index.html', {
         'testes_list': testes_list,
