@@ -29,3 +29,5 @@ def home(request):
 
 # 	def get_queryset(self):
 # 	 	return Artigo.objects.all().order_by('-publicacao')[:5]
+def digital(request):
+    return render(request,'digital.html',)

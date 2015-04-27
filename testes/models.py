@@ -3,6 +3,7 @@
 from django.db import models
 from datetime import datetime
 from categorias.models import Categoria
+from artigos.models import Artigo
 
 
 class Tag(models.Model):
@@ -26,6 +27,8 @@ class Teste(models.Model):
     # tag = models.CharField(blank=False, default='', max_length=64,
  #                            help_text='Insira a tag')
     tags = models.ManyToManyField(Tag)  # To demonstrate select2 multiple
+
+    teste_art = models.ManyToManyField(Artigo)
 
     def __unicode__(self):
         return self.titulo #, self.conteudo, self.publicacao

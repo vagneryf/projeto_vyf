@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Digital Sineage</title>
+    {% load staticfiles %}
+</head>
+
+<body>
+<div class="vidBox" id="box">	
+	<video class="vid" preload="metadata" controls="true" id="video1" height="1080" width="1920">
+		<source src="videos/06.mp4" type="video/mp4"></source>
+	</video>
+	<div id="other" style="display:none; width:1280px; height:720px; background-color:#000000">
+	    <p style="">This appears after the video ends</p>
+	</div>
+</div>
+
+
+<script>
+    var vid=document.getElementById('video1');
+    vid.addEventListener("ended", hideVideo, false);
+
+    function hideVideo() {
+        var vid=document.getElementById('video1');
+        var other=document.getElementById('other');
+        vid.removeEventListener("ended", hideVideo, false);
+        vid.style.display='none';
+        other.style.display='block';
+    }
+</script>
+
+</body>
+</html>

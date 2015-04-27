@@ -29,4 +29,5 @@ urlpatterns = patterns('',
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^select2/', include('django_select2.urls')), # para usar o select2
     url(r'^testes/', include('testes.urls', namespace="testes")),
+    url(r'^digital/', 'projeto_vyf.views.digital', name='digital')
 )

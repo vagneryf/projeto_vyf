@@ -27,7 +27,7 @@ from easy_select2 import select2_modelform
     #       '/static/tinymce_setup.js',
     #   ]
 
-TesteForm = select2_modelform(Teste, attrs={'width': '250px'})
+TesteForm = select2_modelform(Teste, attrs={'width': '350px'})
 
 
 # class TesteAdminForm(forms.ModelForm):
