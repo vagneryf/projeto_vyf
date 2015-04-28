@@ -27,7 +27,35 @@ from easy_select2 import select2_modelform
     #       '/static/tinymce_setup.js',
     #   ]
 
-TesteForm = select2_modelform(Teste, attrs={'width': '350px'})
+# TesteForm = select2_modelform(Teste, attrs={'width': '350px'})
+class TesteForm(forms.ModelForm):
+    Meta = select2_modelform(Teste, attrs={'width': '350px'})
+
+#     def __init__(self, *args, **kwargs):
+#         super(TesteForm, self).__init__(*args, **kwargs)
+
+#         #
+#         # Let's create the *current* list of choices for the mood field. By
+#         # putting this code here, it will ensure that the list is up-to-date
+#         # for each usage of the form.
+#         #
+#         # Also, you could personalize the experience by filtering the query to
+#         # only those Notes previously edited by this user. The effect would be
+#         # that each project Admin would see only their personal list of moods
+#         # that they've used in the past.
+#         #
+#         # You should note, that we are using denormalized table
+#         # structure there, what perfectly solves the problem.
+#         #
+#         # mood_data = Teste.objects.values_list('mood', flat=True).order_by('mood')
+#         mood_data = Teste.objects.values_list('titulo', flat=True) #.order_by('id')
+
+#         self.fields['mood'].widget = Select2TextInput(select2attrs={
+#             #
+#             # This is how Select2 expects the list of choices.
+#             #
+#             'data': [{'id': x, 'titulo': x} for x in mood_data]
+#         })
 
 
 # class TesteAdminForm(forms.ModelForm):
@@ -59,6 +87,8 @@ TesteForm = select2_modelform(Teste, attrs={'width': '350px'})
         # })
 
 
+
+
 class TesteAdmin(admin.ModelAdmin):
     form = TesteForm
 
@@ -67,6 +97,8 @@ class TesteAdmin(admin.ModelAdmin):
             '/static/grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js',
             '/static/tinymce_setup.js',
         ]
+
+
 
 admin.site.register(Tag)
 admin.site.register(Teste, TesteAdmin)

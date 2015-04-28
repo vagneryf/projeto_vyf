@@ -25,7 +25,7 @@ def detail(request, url_testeid):
 def testes_index(request):
 
     testes_list = Teste.objects.all()
-    tag = request.GET.get('tag','').split(',')
+    tag = request.GET.get('tag', ' ').split(',')
     # tag2 = request.GET.get('tag2',)
     categoria = request.GET.get('categoria',0)
     categoria_nome = 0
@@ -36,8 +36,7 @@ def testes_index(request):
         testes_list = testes_list.filter(categoria=categoria)
         categoria_nome = Categoria.objects.get(pk=categoria)
 
-
-    if tag:
+    if len(tag) > 1:
         testes_list = testes_list.filter(tags__in=tag).distinct()
         tag_nome = Tag.objects.filter(id__in=tag).distinct()
 
