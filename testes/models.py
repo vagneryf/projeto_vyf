@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-
 from django.db import models
-from datetime import datetime
+from django.db.models import Q
+from datetime import datetime, timedelta
 from categorias.models import Categoria
 from artigos.models import Artigo
+from django.core.exceptions import ValidationError
 
 
 class Tag(models.Model):
@@ -18,8 +19,19 @@ class Tag(models.Model):
 def limit_publicacao_choices():
     return {'publicacao__lte': datetime.now()}
 
-# def limit_quant_choices():
-#     return ()
+def filtros_q():
+    # data_hoje = datetime.now()
+    # data_antes = data_hoje - timedelta(days=190)
+    # testes_in = Teste.objects.all()[:3]
+    # filtro_q = Q(id__in=testes_in) & Q(publicacao__range=(data_antes, data_hoje)) & Q(categoria=6)
+    testes_in = Teste.objects.filter(categoria='6').filter(publicacao__lte=datetime.now()).values_list('id', flat=True)[:3]
+    # try:
+    #     testes_existente = Teste.objects.fiter(id__in='relacao_existente_id').values_list('id', flat=True)
+    #     testes_in = testes_in + testes_existente
+    # except Exception, e:
+    #     pass  
+    filtro_q = Q(id__in=testes_in)
+    return filtro_q
 
 class Teste(models.Model):
     titulo = models.CharField(max_length=100)
@@ -27,25 +39,28 @@ class Teste(models.Model):
     publicacao = models.DateTimeField('Data de Publicacao', default=datetime.now, blank=True)
     # colocar o default=datetime.now, blank=True para data atual automatica
     categoria = models.ForeignKey(Categoria, null=True, blank=True)
-
-    # tag = models.CharField(blank=False, default='', max_length=64,
- #                            help_text='Insira a tag')
     tags = models.ManyToManyField(Tag, blank=True, null=True)  # To demonstrate select2 multiple
-    tags_2 = models.CharField(Tag, max_length=100, blank=True, null=True)
-    teste_art = models.ManyToManyField(Artigo, blank=True, null=True)
+    # tags_2 = models.CharField(Tag, max_length=100, blank=True, null=True)
+    # teste_art = models.ManyToManyField(Artigo, blank=True, null=True)
 
-    # mood = models.CharField(blank=False, default='', max_length=64,
-    #                         help_text='What is your current mood?')
+    relacao_teste = models.ManyToManyField('self', blank=True, null=True, symmetrical=False, limit_choices_to=filtros_q, help_text=u'Selecione 2 artigos no máximo. ')
 
-    relacao_teste = models.ManyToManyField("self", blank=True, null=True, symmetrical=False, limit_choices_to = limit_publicacao_choices)# related_name='+') limit_choices_to={'id': 1}, ) # through='RelacaoTeste', symmetrical=False, related_name='related_to')
+    # try:
+    #     relacao_existente_id = self.relacao_teste.all().values_list('id', flat=True)
+    #     print 'veio'
+    # except Exception, e:
+    #     pass
+    # def clean_relacao_teste(self):
+    #     relacao_verificar = self.relacao_teste
+    #     if len(relacao_verificar) > 2:
+            # self.relacao_teste = None
+            # return self.relacao_teste
+            # raise ValidationError(u'Adicionar no máximo 2 artigos!!')
+        # else:
+        #     return relacao_verificar
 
     def __unicode__(self):
         return self.titulo #, self.conteudo, self.publicacao
         # erro ao retornar + de um item em self
     class Meta:
         ordering = ('-publicacao',) # ordena a ordem dos artigos
-
-
-# class RelacaoTeste(models.Model):
-#     from_teste = models.ForeignKey(Teste, related_name='from_teste')
-#     to_teste = models.ForeignKey(Teste, related_name='to_teste')
