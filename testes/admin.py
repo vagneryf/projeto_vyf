@@ -5,7 +5,7 @@ from .models import Teste, Tag
 from categorias.models import Categoria
 # from django.db.models import Q
 from datetime import datetime, timedelta
-# from easy_select2 import select2_modelform, select2_modelform_meta, Select2TextInput
+from easy_select2 import select2_modelform, select2_modelform_meta, Select2TextInput
 
 # class TesteAdmin(admin.ModelAdmin):
 #     list_display = ('titulo','publicacao','categoria',)
@@ -29,7 +29,7 @@ from datetime import datetime, timedelta
 class TesteAdminForm(forms.ModelForm):
     class Meta:
         model = Teste
-        exclude = ['publicacao']
+        exclude = []
 
     def __init__(self, *args, **kwargs):
         super(TesteAdminForm, self).__init__(*args, **kwargs)
@@ -39,7 +39,7 @@ class TesteAdminForm(forms.ModelForm):
             ts = self.instance.relacao_teste
             s = ts.all().values_list('id', flat=True)
             s = list(s)
-        t = Teste.objects.filter(categoria='6').filter(publicacao__lte=datetime.now()).values_list('id', flat=True)[:3]
+        t = Teste.objects.filter(categoria='6').filter(publicacao__lte=datetime.now()).values_list('id', flat=True)[:5]
         t = list(t)
         t += s
         qs = Teste.objects.filter(id__in=t)
@@ -53,6 +53,8 @@ class TesteAdmin(admin.ModelAdmin):
     list_display = ('titulo','publicacao','categoria',)
     list_filter = ['publicacao','categoria']
     search_fields = ['titulo']
+    filter_horizontal = ('relacao_teste',)
+    raw_id_fields = ('categoria',)
 
     class Media:
       js = [

@@ -28,6 +28,18 @@
 		{% endfor %}
 
 
+		{% if teste.relacao_teste %}
+			
+		<h3>Relacionados:</h3>
+		
+		{% for teste_r in teste.relacao_teste.all %}
+			<p><a href="/testes/{{ teste_r.id }}">{{ teste_r }} {{ teste_r.id }} - {{ teste_r.publicacao }}</a></p>
+		{% endfor %}
+	
+		{% endif %}
+		
+		<p></p>
+
 		<select class="js-example-basic-multiple" multiple="multiple" style="width: 300px">
 			<option value="AL">Alabama</option>
   			<option value="AU">Aulabama</option>

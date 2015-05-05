@@ -46,7 +46,7 @@ class Teste(models.Model):
     # tags_2 = models.CharField(Tag, max_length=100, blank=True, null=True)
     # teste_art = models.ManyToManyField(Artigo, blank=True, null=True)
 
-    relacao_teste = models.ManyToManyField('self', blank=True, null=True, symmetrical=False)#, limit_choices_to=filtros_q, help_text=u'Selecione 2 artigos no máximo. ')
+    relacao_teste = models.ManyToManyField('self', blank=True, null=True, symmetrical=False, verbose_name='Testes Relacionados')#, limit_choices_to=filtros_q, help_text=u'Selecione 2 artigos no máximo. ')
     
 
 
