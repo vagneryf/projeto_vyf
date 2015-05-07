@@ -55,6 +55,8 @@ class TesteAdmin(admin.ModelAdmin):
     search_fields = ['titulo']
     filter_horizontal = ('relacao_teste',)
     raw_id_fields = ('categoria',)
+    change_list_template = "admin/change_list_filter_sidebar.html"
+    change_list_filter_template = "admin/filter_listing.html"
 
     class Media:
       js = [
