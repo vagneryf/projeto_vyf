@@ -1,0 +1,13 @@
+{% if lista_artigos %}
+
+	<div class="list-group">
+		<a class="list-group-item active" href="#">
+			<b>Últimos Artigos:</b>
+		</a>
+		{% for artigo in lista_artigos %}
+			<a class="list-group-item" href="{% url 'artigos:detail' artigo.id %}">{{ artigo }} <font color="lightgray"> Publicado em: {{ artigo.publicacao }}</font></a>	
+		{% endfor %}
+	</div>
+	{% else %}
+		<p>Nenhum artigo disponível</p>
+{% endif %}

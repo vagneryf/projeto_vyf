@@ -2,6 +2,8 @@
 
 {% load staticfiles %}
 
+{% load artigos_tags %}
+
 {% block content %}
 
 {# Apenas para delimitar o campo das propagandas #}
@@ -52,6 +54,9 @@
 	<h3>Artigos Recentes</h3>
 	{% include "artigos/artigos_lista.html" with artigos_list=artigos_list %}
 	{% include "artigos/noticias_lista.html" with noticias_list=noticias_list %}
+	<h3>Artigos Recentes pelo Templatetags</h3>
+	{% lista_artigos %}
+
 </div>
 
  
