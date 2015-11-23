@@ -2,6 +2,10 @@
 Thumbs.db
 ehthumbs.db
 
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
 # Folder config file
 Desktop.ini
 
