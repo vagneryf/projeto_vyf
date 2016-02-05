@@ -109,8 +109,22 @@ USE_TZ = True
 
 MEDIA_URL = 'http://localhost:8080/'
 
+FILEBROWSER_VERSIONS = {
+    #'admin_thumbnail': {'verbose_name': 'Admin Thumbnail', 'width': 70, 'height': 70, 'opts': 'crop'},
+    'thumbnail': {'verbose_name': 'Thumbnail', 'width': 100, 'height': '', 'opts': ''},
+    'free_small': {'verbose_name': 'Livre 1/3 (220px)', 'width': 220, 'height': '', 'opts': ''},
+    'free_medium': {'verbose_name': 'Livre Média 1/2 (340px)', 'width': 340, 'height': '', 'opts': ''},
+    'free_big': {'verbose_name': 'Livre Grande (680px)', 'width': 680, 'height': '', 'opts': ''},
+}
+FILEBROWSER_ADMIN_VERSIONS = ['free_small', 'free_medium', 'free_big',]
+FILEBROWSER_ADMIN_THUMBNAIL = 'thumbnail'
+FILEBROWSER_SEARCH_TRAVERSE = True
+FILEBROWSER_NORMALIZE_FILENAME = True
+FILEBROWSER_CONVERT_FILENAME = True
 FILEBROWSER_DIRECTORY = ''
 # FILEBROWSER_DIRECTORY = getattr(settings, "FILEBROWSER_DIRECTORY", 'uploads/')
+FILEBROWSER_VERSIONS_BASEDIR = '_versions/'
+FILEBROWSER_OVERWRITE_EXISTING = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
