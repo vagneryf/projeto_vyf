@@ -47,5 +47,5 @@ Temporary Items
 .apdisk
 
 # Pasta _static/ ignorar 
-_static/ 
-_desnecessario/ 
+_static/*
+_desnecessario/*
